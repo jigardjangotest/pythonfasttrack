@@ -1,0 +1,25 @@
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('',views.index,name='index'),
+    path('contact/',views.contact,name='contact'),
+    path('signup/',views.signup,name='signup'),
+    path('login/',views.login,name='login'),
+    path('logout/',views.logout,name='logout'),
+    path('change_password/',views.change_password,name='change_password'),
+    path('faculty_change_password/',views.faculty_change_password,name='faculty_change_password'),
+    path('faculty_index/',views.faculty_index,name='faculty_index'),
+    path('mystudents/',views.mystudents,name='mystudents'),
+    # path('ajax/change_status/',views.change_status,name='change_status'),
+    path('change_status/<int:pk>/',views.change_status,name='change_status'),
+    path('add_course/',views.add_course,name='add_course'),
+    path('add_questions/',views.add_questions,name='add_questions'),
+    path('exam/',views.exam,name='exam'),
+    path('exam_course/<str:cname>/',views.exam_course,name='exam_course'),
+    path('start_exam/<str:cname>/',views.start_exam,name='start_exam'),
+    path('exam_checker/',views.exam_checker,name='exam_checker'),
+    path('myresult/',views.myresult,name='myresult'),
+    path('result/',views.result,name='result'),
+    path('faculty_profile/',views.faculty_profile,name='faculty_profile'),
+    path('ajax/validate_username/',views.validate_username,name='validate_username'),
+]

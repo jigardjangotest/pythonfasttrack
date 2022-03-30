@@ -1,0 +1,93 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VictoryPro | Exam</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script>
+  var count = 15;
+  var interval = setInterval(function(){
+  document.getElementById('count').innerHTML=count;
+  count--;
+  if (count === 0){
+    clearInterval(interval);
+    document.getElementById('count').innerHTML='Done';
+    // or...
+    alert("You're out of time!");
+    document.mcq.submit();
+  }
+}, 1000);
+</script>
+</head>
+<body>
+<div class="main">
+  
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Exam</span></h2>
+          <div class="clr"></div>
+         
+        </div>
+        <span id="count"></span>
+        <form name="mcq" method="post" action="{% url 'exam_checker' %}" onload="document.mcq.submit()">
+          {% csrf_token %}
+          <ol style="color:black;">
+          {% for i in questions %}
+          
+            <li><h3>{{i.question}}</h3></li>
+            <h4>
+              <input type="radio" name="{{i.id}}" value="op1">{{i.op1}}
+            </h4>
+            <h4>
+              <input type="radio" name="{{i.id}}" value="op2">{{i.op2}}
+            </h4>
+            <h4>
+              <input type="radio" name="{{i.id}}" value="op3">{{i.op3}}
+            </h4>
+            <h4>
+              <input type="radio" name="{{i.id}}" value="op4">{{i.op4}}
+            </h4>
+          
+          {% endfor %}    
+          </ol> 
+          <input type="submit" value="SUBMIT EXAM" class="btn btn-primary">
+        </form>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="fbg">
+    <div class="fbg_resize">
+      
+      
+      
+      <div class="clr"></div>
+    </div>
+  </div>
+ 
+</div>
+<!-- <script>
+  function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
+// To disable f5
+    /* jQuery < 1.7 */
+$(document).bind("keydown", disableF5);
+/* OR jQuery >= 1.7 */
+$(document).on("keydown", disableF5);
+
+addEventListener("click", function() {
+    var
+          el = document.documentElement
+        , rfs =
+               el.requestFullScreen
+            || el.webkitRequestFullScreen
+            || el.mozRequestFullScreen
+    ;
+    rfs.call(el);
+});
+</script> -->
+</body>
+</html>
+{% endblock %}

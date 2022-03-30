@@ -1,0 +1,132 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VictoryPro | Sign Up</title>
+
+</head>
+<body>
+<div class="main">
+  
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Sign Up</span></h2>
+          <div class="clr"></div>
+          
+        </div>
+        <div class="article">
+          {% if msg %}
+            <h3 style="color:white;">{{msg}}</h3>
+          {% endif %}
+          <div class="clr"></div>
+          <form action="{% url 'signup' %}" method="post" id="sendemail" enctype="multipart/form-data">
+            {% csrf_token %}
+            <ol>
+              <li>
+                <label for="name">Usertype (required)</label>
+                <select class="text" name="usertype">
+                  <option>---Select User Type---</option>
+                  <option value="student">Student</option>
+                  <option value="faculty">Faculty</option>
+                </select>
+              </li>
+              <li>
+                <label for="name">First Name (required)</label>
+                <input id="name" name="fname" class="text" />
+              </li>
+              <li>
+                <label for="name">Last Name (required)</label>
+                <input id="name" name="lname" class="text" />
+              </li>
+              <li>
+                <label for="email">Email Address (required)</label>
+                <input id="email" name="email" class="text" />
+                <span id="email_error" style="color:red;"></span>
+              </li>
+              <li>
+                <label for="website">Mobile</label>
+                <input id="website" name="mobile" class="text" />
+              </li>
+              <li>
+                <label for="message">Address</label>
+                <textarea id="message" name="address" rows="8" cols="50"></textarea>
+              </li>
+              <li>
+                <label for="website">Password</label>
+                <input type="password" id="website" name="password" class="text" />
+              </li>
+              <li>
+                <label for="website">Confirm Password</label>
+                <input type="password" id="website" name="cpassword" class="text" />
+              </li>
+              <li>
+                <label for="website">Profile Picture</label>
+                <input type="file" id="website" name="profile_pic" class="text" />
+              </li>
+              <li>
+                <input type="submit" value="Sign Up" class="btn btn-danger" />
+                <div class="clr"></div>
+              </li>
+            </ol>
+          </form>
+        </div>
+      </div>
+      
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Image</span> Gallery</h2>
+        <a href="#"><img src="{% static 'images/gal1.jpg' %}" width="75" height="75" alt="" class="gal" /></a> <a href="#"><img src="{% static 'images/gal2.jpg' %}" width="75" height="75" alt="" class="gal" /></a> <a href="#"><img src="{% static 'images/gal3.jpg' %}" width="75" height="75" alt="" class="gal" /></a> <a href="#"><img src="{% static 'images/gal4.jpg' %}" width="75" height="75" alt="" class="gal" /></a> <a href="#"><img src="{% static 'images/gal5.jpg' %}" width="75" height="75" alt="" class="gal" /></a> <a href="#"><img src="{% static 'images/gal6.jpg' %}" width="75" height="75" alt="" class="gal" /></a> </div>
+      <div class="col c2">
+        <h2><span>Services</span> Overview</h2>
+        <p>Curabitur sed urna id nunc pulvinar semper. Nunc sit amet tortor sit amet lacus sagittis posuere cursus vitae nunc.Etiam venenatis, turpis at eleifend porta, nisl nulla bibendum justo.</p>
+        <ul class="fbg_ul">
+          <li><a href="#">Lorem ipsum dolor labore et dolore.</a></li>
+          <li><a href="#">Excepteur officia deserunt.</a></li>
+          <li><a href="#">Integer tellus ipsum tempor sed.</a></li>
+        </ul>
+      </div>
+      <div class="col c3">
+        <h2><span>Contact</span> Us</h2>
+        <p>Nullam quam lorem, tristique non vestibulum nec, consectetur in risus. Aliquam a quam vel leo gravida gravida eu porttitor dui.</p>
+        <p class="contact_info"> <span>Address:</span> 1458 TemplateAccess, USA<br />
+          <span>Telephone:</span> +123-1234-5678<br />
+          <span>FAX:</span> +458-4578<br />
+          <span>Others:</span> +301 - 0125 - 01258<br />
+          <span>E-mail:</span> <a href="#">mail@yoursitename.com</a> </p>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+ 
+</div>
+
+<script>
+    $("#email").change(function () {  
+      var email = $(this).val();
+
+      $.ajax({
+        url: '/ajax/validate_username/',
+        data: {
+          'email': email
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            document.getElementById("email_error").innerHTML="Email Already Registered";
+          }
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
+{% endblock %}

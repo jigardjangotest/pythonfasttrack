@@ -1,0 +1,56 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VictoryPro | Exam</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="main">
+  
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Exam</span></h2>
+          <div class="clr"></div>
+         
+        </div>
+        <div class="article">
+          <h2 style="color:black;"><span>Select Your</span> Course</h2>
+          <br><br>
+          <h2 style="color:black;">Welcome To {{cname}} Exam, {{request.session.fname}}</h2>
+          <h4 style="color:black;">
+            Please Follow Instruction For Starting The Exam First
+          </h4>
+          <h5 style="color:black;">
+            <ol>
+              <li>Exam Will Be For 30 Minutes</li>
+              <li>No Negative Marking</li>
+              <li>Each Question Contanits 1 Marks For Correct Answer</li>
+            </ol>
+          </h5>
+          <h1>
+            <a href="{% url 'start_exam' cname=cname %}">Start Exam</a>
+          </h1>
+      </div>
+      
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="fbg">
+    <div class="fbg_resize">
+      
+      
+      
+      <div class="clr"></div>
+    </div>
+  </div>
+ 
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VictoryPro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/coin-slider.css' %}" />
+<script type="text/javascript" src="{% static 'js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cufon-georgia.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-1.4.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/coin-slider.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="menu_nav">
+        <ul>
+          <li class="active"><a href="/"><span>Home Page</span></a></li>
+          
+          <li><a href="about.html"><span>About Us</span></a></li>
+          <li><a href="{% url 'contact' %}"><span>Contact Us</span></a></li>
+          {% if request.session.email %}
+            <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
+            <li><a href="{% url 'change_password' %}"><span>Change Password</span></a></li>
+            <li><a href="{% url 'exam' %}"><span>Exam</span></a></li>
+            <li><a href="{% url 'myresult' %}"><span>My Results</span></a></li>
+            <li><img src="{{request.session.profile_pic}}" height="50px" width="50px"></li>
+
+          {% else %}
+            <li><a href="{% url 'signup' %}"><span>Sign Up</span></a></li>
+            <li><a href="{% url 'login' %}"><span>Login</span></a></li>
+          {% endif %}
+            
+
+        </ul>
+      </div>
+      <div class="logo">
+        <h1><a href="/">Victory<span>Pro</span></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="slider">
+        <div id="coin-slider"> 
+          <a href="#"><img src="{% static 'images/slide1.jpg' %}" width="960" height="360" alt="" /></a></div>
+        <div class="clr"></div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  {% block content %}
+  {% endblock %}
+  <div class="footer">
+    <div class="footer_resize">
+      <p class="lf">Copyright &copy; <a href="#">Domain Name</a>. All Rights Reserved</p>
+      <p class="rf">Design by <a target="_blank" href="http://www.dreamtemplate.com/">DreamTemplate</a></p>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

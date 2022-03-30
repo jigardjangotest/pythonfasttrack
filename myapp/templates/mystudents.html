@@ -1,0 +1,73 @@
+{% extends 'faculty_header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VictoryPro</title>
+
+</head>
+<body>
+<div class="main">
+  <table width="100%" border="5" cellpadding="10px" cellspacing="10px" style="color:white;font-size: 20px;">
+    <tr>
+      <th>Roll No</th>
+      <td>First Name</td>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Staus</th>
+      <th>Action</th>
+      
+    </tr>
+    <tbody id="dispData">
+      {% for i in students %}
+      <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.fname}}</td>
+        <td>{{i.lname}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.status}}</td>
+
+        {% if i.status == "pending" %}
+          <td><a href="">
+            <a href="{% url 'change_status' pk=i.pk %}"><button type="button" class="btn btn-danger">Approve</button></a>
+          </a></td>
+        {% else %}
+          <td><a href="">Approved</a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- <script>
+    $("button").click(function (e) { 
+     
+      var status = $(this).attr('id');
+      event.preventDefault();      
+      $.ajax({
+        url: '/ajax/change_status/',
+        
+        data: {
+          'status': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          
+          alert(data);
+         /* $.each( data, function( key, value ) {
+          // console.log("key ", value.fields.email)
+
+          htmlData = "<tr><td>"+ value.fields.id+"</td><td>"+ value.fields.fname+"</td><td>"+ value.fields.lname+"</td><td>"+ value.fields.email+"</td><td>"+ value.fields.status+"</td></tr>";
+          });*/
+          /*$("#dispData").html(htmlData)*/
+        }
+      });
+
+    });
+  </script> -->
+</body>
+</html>
+{% endblock %}
